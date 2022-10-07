@@ -67,13 +67,13 @@ function findDuplicateTransactions(transactions) {
   //console.log("mod sorted is ", mod)
   let output = [];
   let buffer = [];
-  let result = [];
+  let taken = [];
 
   for (let i = 0; i < mod.length; i++) {
-    if (result.some((x) => x.id == mod[i].id)) continue;
+    if (taken.some((x) => x.id == mod[i].id)) continue;
     else buffer.push(mod[i]);
     for (let j = 0; j < mod.length; j++) {
-      if (result.some((x) => x.id == mod[j].id)) continue;
+      if (taken.some((x) => x.id == mod[j].id)) continue;
       else if (
         mod[i].id != mod[j].id &&
         mod[i].sourceAccount === mod[j].sourceAccount &&
@@ -95,7 +95,7 @@ function findDuplicateTransactions(transactions) {
 
     }
     for (let i = 0; i < buffer.length; i++) {
-      result.push(buffer[i]);
+      taken.push(buffer[i]);
     }
     if (buffer.length > 1) {
       output.push(buffer);
